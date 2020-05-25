@@ -1,0 +1,84 @@
+<div class="container-fluid">
+  <div class="jumbotron jumbotron-fluid">
+    <div class="container">
+      <h1 class="display-4">Teachers</h1>
+      <button class="btn btn-primary" (click)="open(teacherForm)">
+        Add teacher
+      </button>
+      <hr class="my-4">
+      <table *ngIf="teachers.length > 0" class="table table-dark">
+        <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Name</th>
+          <th scope="col">Joined on</th>
+          <th scope="col">School</th>
+          <th scope="col">Specialized fields</th>
+          <th scope="col">Is active</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let teacher of teachers">
+          <th scope="row">{{ teacher.teacherId }}</th>
+          <td>{{ teacher.name }}</td>
+          <td>{{ teacher.joinDate | date: "longDate"}}</td>
+          <td>{{ teacher.school }}</td>
+          <td>{{ teacher.specialistFields.join(', ') }}</td>
+          <td>{{ teacher.isActive }}</td>
+        </tr>
+        </tbody>
+      </table>
+      <ng-template #teacherForm let-modal>
+        <div class="modal-header">
+          <h5 class="modal-title" id="teacherModalLabel">New teacher</h5>
+          <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Close click')">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form #f="ngForm" (submit)="onSubmit(f)">
+            <div class="form-group">
+              <label class="font-weight-bold" for="name">Full name</label>
+              <input type="text" class="form-control" id="name" name="name" placeholder="Enter full name" required
+                     ngModel>
+            </div>
+            <div class="form-group">
+              <label class="font-weight-bold" for="school">School</label>
+              <select class="form-control" id="school" name="school" required ngModel>
+                <option id="schoolTartu" value="schoolTartu">International school of Tartu</option>
+                <option id="schoolTallinn" value="schoolTallinn">International school of Tallinn</option>
+                <option id="schoolParnu" value="schoolParnu">International school of Parnu</option>
+                <option id="schoolViljandi" value="schoolViljandi">International school of Viljandi</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="font-weight-bold" for="fields">Specialized Fields</label>
+              <select multiple class="form-control" id="fields" name="fields" required ngModel>
+                <option id="mathematics" value="mathematics">Mathematics</option>
+                <option id="social" value="social">Social science</option>
+                <option id="linguistics" value="linguistics">Linguistic studies</option>
+                <option id="zoology" value="zoology">Zoology</option>
+                <option id="geography" value="geography">Geography</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="font-weight-bold" for="joindate">Join date</label>
+              <div class="input-group">
+                <input class="form-control" id="joindate" name="joindate" placeholder="mm-dd-yyyy" ngModel
+                       ngbDatepicker #d="ngbDatepicker"/>
+                <div class="input-group-append">
+                  <button class="btn btn-outline-secondary calendar" (click)="d.toggle()" type="button"></button>
+                </div>
+              </div>
+            </div>
+            <div class="form-group form-check">
+              <input type="checkbox" class="form-check-input" id="isactive" name="isactive" ngModel>
+              <label class="form-check label font-weight-bold" for="isactive">Is Active</label>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </form>
+        </div>
+      </ng-template>
+    </div>
+  </div>
+</div>
