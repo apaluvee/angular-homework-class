@@ -18,4 +18,5 @@ export class StudentService {
   public createStudent(student: Student) {
     this.httpClient.post<Student>(this.STUDENT_API_URL, student).subscribe();
   }
+
 }

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import {Teacher} from '../model/teacher';
 
 @Injectable({
@@ -7,7 +7,7 @@ import {Teacher} from '../model/teacher';
 })
 export class TeacherService {
 
-  private TEACHER_API_URL = 'http://5d7e077fd756030014184069.mockapi.io/teacher';
+  private TEACHER_API_URL = 'http://localhost:8080/teacher';
 
   constructor(private httpClient: HttpClient) { }
 
@@ -18,4 +18,5 @@ export class TeacherService {
   public createTeacher(teacher: Teacher) {
     this.httpClient.post(this.TEACHER_API_URL, teacher).subscribe();
   }
+
 }

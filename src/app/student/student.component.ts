@@ -1,8 +1,7 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, ViewChild, ElementRef, OnInit} from '@angular/core';
 import {Student} from './model/student';
-import {StudentService} from './data/student.service';
 import {Utils} from '../commons/utils';
-import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {StudentService} from './data/student.service';
 
 @Component({
   selector: 'app-student',
@@ -11,14 +10,11 @@ import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 })
 export class StudentComponent implements OnInit {
   students = [];
+  @ViewChild('closeNewStudentModal', {static: false}) closeNewStudentModal: ElementRef;
 
-  constructor(private studentService: StudentService, private modalService: NgbModal) {
-  }
-  open(content) {
-    this.modalService.open(content, {ariaLabelledBy: 'studentModalLabel'});
-  }
+  constructor(private studentService: StudentService) {}
 
-  ngOnInit(): void {
+  ngOnInit() {
     this.studentService.getAllStudents().subscribe((data: any[]) => {
       this.students = data;
     });
@@ -26,31 +22,14 @@ export class StudentComponent implements OnInit {
 
   onSubmit(f) {
     const utilsInstance = new Utils();
-
     const joinDateString = f.value.joindate.month.toString() + '-' + f.value.joindate.day.toString() + '-' +
       f.value.joindate.year.toString();
 
     this.studentService.createStudent(new Student(f.value.name, new Date(joinDateString), f.value.isactive === true,
-      utilsInstance.getSchoolName(f.value.school), this.getSpecializedFields(f.value.fields)));
+      utilsInstance.getSchoolName(f.value.school), Number(f.value.grade)));
 
-    this.modalService.dismissAll();
+    this.closeNewStudentModal.nativeElement.click();
     setTimeout('location.reload();', 2000);
-  }
-
-  getSpecializedFields(fieldsArr) {
-    const result = [];
-
-    for (const field of fieldsArr) {
-      switch (field) {
-        case 'mathematics':
-          result.push('Mathematics');
-          break;
-        case 'english':
-          result.push('English');
-          break;
-      }
-    }
-    return result;
   }
 
 }

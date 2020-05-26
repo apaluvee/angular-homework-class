@@ -15,4 +15,5 @@ export class Utils {
         return 'International school of Viljandi';
     }
   }
+
 }
