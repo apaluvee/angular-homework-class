@@ -1,7 +1,8 @@
-import {Component, ViewChild, ElementRef, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Teacher} from './model/teacher';
-import {Utils} from '../commons/utils';
 import {TeacherService} from './data/teacher.service';
+import {Utils} from '../commons/utils';
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-teacher',
@@ -10,12 +11,14 @@ import {TeacherService} from './data/teacher.service';
 })
 export class TeacherComponent implements OnInit {
   teachers = [];
-  @ViewChild('closeNewTeacherModal', {static: false}) closeNewTeacherModal: ElementRef;
 
-  constructor(private teacherService: TeacherService) {
+  constructor(private teacherService: TeacherService, private modalService: NgbModal) {
+  }
+  open(content) {
+    this.modalService.open(content, {ariaLabelledBy: 'teacherModalLabel'});
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.teacherService.getAllTeachers().subscribe((data: any[]) => {
       this.teachers = data;
     });
@@ -23,13 +26,14 @@ export class TeacherComponent implements OnInit {
 
   onSubmit(f) {
     const utilsInstance = new Utils();
+
     const joinDateString = f.value.joindate.month.toString() + '-' + f.value.joindate.day.toString() + '-' +
       f.value.joindate.year.toString();
 
     this.teacherService.createTeacher(new Teacher(f.value.name, new Date(joinDateString), f.value.isactive === true,
       utilsInstance.getSchoolName(f.value.school), this.getSpecializedFields(f.value.fields)));
 
-    this.closeNewTeacherModal.nativeElement.click();
+    this.modalService.dismissAll();
     setTimeout('location.reload();', 2000);
   }
 

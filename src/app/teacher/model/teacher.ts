@@ -8,14 +8,13 @@ export class Teacher {
   school: string;
   specialistFields: string[];
 
-  constructor(name, joinDate, isActive, school, specialistFields) {
-    const utilsInstance = new Utils();
-    this.teacherId = 'T' + utilsInstance.getRandomId();
+  constructor(name: string, joinDate: Date, isActive: boolean, school: string, specialistFields: string[]) {
+    const utilInstance = new Utils();
+    this.teacherId = 'T' + utilInstance.getRandomId();
     this.name = name;
     this.joinDate = joinDate;
     this.isActive = isActive;
     this.school = school;
     this.specialistFields = specialistFields;
   }
-
 }

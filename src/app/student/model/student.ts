@@ -6,16 +6,15 @@ export class Student {
   joinDate: Date;
   isActive: boolean;
   school: string;
-  grade: number;
+  specialistFields: string[];
 
-  constructor(name, joinDate, isActive, school, grade) {
-    const utilsInstance = new Utils();
-    this.studentId = 'S' + utilsInstance.getRandomId();
+  constructor(name: string, joinDate: Date, isActive: boolean, school: string, specialistFields: string[]) {
+    const utilInstance = new Utils();
+    this.studentId = 'T' + utilInstance.getRandomId();
     this.name = name;
     this.joinDate = joinDate;
     this.isActive = isActive;
     this.school = school;
-    this.grade = grade;
+    this.specialistFields = specialistFields;
   }
-
 }
