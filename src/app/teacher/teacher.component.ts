@@ -30,7 +30,7 @@ export class TeacherComponent implements OnInit {
     const joinDateString = f.value.joindate.month.toString() + '-' + f.value.joindate.day.toString() + '-' +
       f.value.joindate.year.toString();
 
-    this.teacherService.createTeacher(new Teacher(f.value.name, new Date(joinDateString), f.value.isactive === true,
+    this.teacherService.createTeacher(new Teacher(f.value.id, f.value.name, new Date(joinDateString), f.value.isactive === true,
       utilsInstance.getSchoolName(f.value.school), this.getSpecializedFields(f.value.fields)));
 
     this.modalService.dismissAll();

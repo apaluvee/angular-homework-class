@@ -19,12 +19,12 @@
         </thead>
         <tbody>
         <tr *ngFor="let teacher of teachers">
-          <th scope="row">{{ teacher.teacherId }}</th>
+          <th scope="row">{{ teacher.id }}</th>
           <td>{{ teacher.name }}</td>
           <td>{{ teacher.joinDate | date: "longDate"}}</td>
-          <td>{{ teacher.school }}</td>
+          <td>{{ teacher.school.name }}</td>
           <td>{{ teacher.specialistFields.join(', ') }}</td>
-          <td>{{ teacher.isActive }}</td>
+          <td>{{ teacher.active }}</td>
         </tr>
         </tbody>
       </table>
