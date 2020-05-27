@@ -3,6 +3,7 @@ import {Student} from './model/student';
 import {StudentService} from './data/student.service';
 import {Utils} from '../commons/utils';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {SchoolService} from '../school/data/school.service';
 
 @Component({
   selector: 'app-student',
@@ -11,8 +12,9 @@ import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 })
 export class StudentComponent implements OnInit {
   students = [];
+  schools = [];
 
-  constructor(private studentService: StudentService, private modalService: NgbModal) {
+  constructor(private studentService: StudentService, private modalService: NgbModal, private schoolService: SchoolService) {
   }
   open(content) {
     this.modalService.open(content, {ariaLabelledBy: 'studentModalLabel'});
@@ -21,6 +23,9 @@ export class StudentComponent implements OnInit {
   ngOnInit(): void {
     this.studentService.getAllStudents().subscribe((data: any[]) => {
       this.students = data;
+    });
+    this.schoolService.getAllSchools().subscribe((data: any[]) => {
+      this.schools = data;
     });
   }
 

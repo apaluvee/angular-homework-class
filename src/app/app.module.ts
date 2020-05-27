@@ -8,6 +8,7 @@ import { TeacherComponent } from './teacher/teacher.component';
 import {RouterModule, Routes} from '@angular/router';
 import {HttpClientModule} from '@angular/common/http';
 import {FormsModule} from '@angular/forms';
+import { SchoolComponent } from './school/school.component';
 
 const appRoutes: Routes = [
   {
@@ -24,7 +25,8 @@ const appRoutes: Routes = [
   declarations: [
     AppComponent,
     StudentComponent,
-    TeacherComponent
+    TeacherComponent,
+    SchoolComponent
   ],
   imports: [
     BrowserModule,

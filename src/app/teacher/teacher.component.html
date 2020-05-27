@@ -45,10 +45,9 @@
             <div class="form-group">
               <label class="font-weight-bold" for="school">School</label>
               <select class="form-control" id="school" name="school" required ngModel>
-                <option id="schoolTartu" value="schoolTartu">International school of Tartu</option>
-                <option id="schoolTallinn" value="schoolTallinn">International school of Tallinn</option>
-                <option id="schoolParnu" value="schoolParnu">International school of Parnu</option>
-                <option id="schoolViljandi" value="schoolViljandi">International school of Viljandi</option>
+
+                <option *ngFor="let school of schools" id="{{ school.id }}" value="{{ school }}">{{ school.name }}</option>
+
               </select>
             </div>
             <div class="form-group">
@@ -70,10 +69,6 @@
                   <button class="btn btn-outline-secondary calendar" (click)="d.toggle()" type="button"></button>
                 </div>
               </div>
-            </div>
-            <div class="form-group form-check">
-              <input type="checkbox" class="form-check-input" id="isactive" name="isactive" ngModel>
-              <label class="form-check label font-weight-bold" for="isactive">Is Active</label>
             </div>
             <button type="submit" class="btn btn-primary">Submit</button>
           </form>

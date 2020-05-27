@@ -3,6 +3,7 @@ import {Teacher} from './model/teacher';
 import {TeacherService} from './data/teacher.service';
 import {Utils} from '../commons/utils';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {SchoolService} from '../school/data/school.service';
 
 @Component({
   selector: 'app-teacher',
@@ -11,8 +12,9 @@ import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 })
 export class TeacherComponent implements OnInit {
   teachers = [];
+  schools = [];
 
-  constructor(private teacherService: TeacherService, private modalService: NgbModal) {
+  constructor(private teacherService: TeacherService, private modalService: NgbModal, private schoolService: SchoolService) {
   }
   open(content) {
     this.modalService.open(content, {ariaLabelledBy: 'teacherModalLabel'});
@@ -22,16 +24,18 @@ export class TeacherComponent implements OnInit {
     this.teacherService.getAllTeachers().subscribe((data: any[]) => {
       this.teachers = data;
     });
+    this.schoolService.getAllSchools().subscribe((data: any[]) => {
+      this.schools = data;
+    });
   }
 
   onSubmit(f) {
-    const utilsInstance = new Utils();
 
-    const joinDateString = f.value.joindate.month.toString() + '-' + f.value.joindate.day.toString() + '-' +
-      f.value.joindate.year.toString();
+    const joinDateString = f.value.joindate.year.toString() + '-' + f.value.joindate.month.toString() + '-' +
+      f.value.joindate.day.toString();
 
-    this.teacherService.createTeacher(new Teacher(f.value.id, f.value.name, new Date(joinDateString), f.value.isactive === true,
-      utilsInstance.getSchoolName(f.value.school), this.getSpecializedFields(f.value.fields)));
+    this.teacherService.createTeacher(new Teacher(f.value.id, f.value.name, new Date(joinDateString), true,
+      f.value.school, this.getSpecializedFields(f.value.fields)));
 
     this.modalService.dismissAll();
     setTimeout('location.reload();', 2000);
