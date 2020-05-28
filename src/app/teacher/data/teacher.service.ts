@@ -9,7 +9,8 @@ export class TeacherService {
 
   private TEACHER_API_URL = 'http://5d7e077fd756030014184069.mockapi.io/teacher';
 
-  constructor(private httpClient: HttpClient) { }
+  constructor(private httpClient: HttpClient) {
+  }
 
   public getAllTeachers() {
     return this.httpClient.get(this.TEACHER_API_URL);
