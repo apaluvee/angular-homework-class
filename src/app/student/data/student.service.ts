@@ -7,7 +7,7 @@ import {Student} from '../model/student';
 })
 export class StudentService {
 
-  private STUDENT_API_URL = 'http://5d7e077fd756030014184069.mockapi.io/student';
+  private STUDENT_API_URL = 'http://localhost:8080/student';
 
   constructor(private httpClient: HttpClient) {
   }
