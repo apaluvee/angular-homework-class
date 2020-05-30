@@ -4,6 +4,7 @@ import {StudentService} from './data/student.service';
 import {Utils} from '../commons/utils';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {SchoolService} from '../school/data/school.service';
+import {Teacher} from '../teacher/model/teacher';
 
 @Component({
   selector: 'app-student',
@@ -30,13 +31,12 @@ export class StudentComponent implements OnInit {
   }
 
   onSubmit(f) {
-    const utilsInstance = new Utils();
 
     const joinDateString = f.value.joindate.month.toString() + '-' + f.value.joindate.day.toString() + '-' +
       f.value.joindate.year.toString();
 
-    this.studentService.createStudent(new Student(f.value.name, new Date(joinDateString), f.value.isactive === true,
-      utilsInstance.getSchoolName(f.value.school), this.getSpecializedFields(f.value.fields)));
+    this.studentService.createStudent(new Student(f.value.id, f.value.name, new Date(joinDateString), true,
+      f.value.school));
 
     this.modalService.dismissAll();
     setTimeout('location.reload();', 2000);
