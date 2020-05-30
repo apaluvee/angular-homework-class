@@ -13,7 +13,7 @@
           <th scope="col">Name</th>
           <th scope="col">Joined on</th>
           <th scope="col">School</th>
-          <th scope="col">Specialized fields</th>
+          <!--<th scope="col">Grade</th>-->
           <th scope="col">Is active</th>
         </tr>
         </thead>
@@ -22,12 +22,13 @@
           <th scope="row">{{ student.studentId }}</th>
           <td>{{ student.name }}</td>
           <td>{{ student.joinDate | date: "longDate"}}</td>
-          <td>{{ student.school }}</td>
-          <td>{{ student.specialistFields.join(', ') }}</td>
-          <td>{{ student.isActive }}</td>
+          <td>{{ student.school.name }}</td>
+          <!--<td>{{ teacher.specialistFields.join(', ') }}</td>-->
+          <td>{{ student.active }}</td>
         </tr>
         </tbody>
       </table>
+
       <ng-template #studentForm let-modal>
         <div class="modal-header">
           <h5 class="modal-title" id="studentModalLabel">New student</h5>
@@ -35,6 +36,7 @@
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
+
         <div class="modal-body">
           <form #f="ngForm" (submit)="onSubmit(f)">
             <div class="form-group">
@@ -42,25 +44,24 @@
               <input type="text" class="form-control" id="name" name="name" placeholder="Enter full name" required
                      ngModel>
             </div>
+
             <div class="form-group">
               <label class="font-weight-bold" for="school">School</label>
               <select class="form-control" id="school" name="school" required ngModel>
-                <option id="schoolTartu" value="schoolTartu">International school of Tartu</option>
-                <option id="schoolTallinn" value="schoolTallinn">International school of Tallinn</option>
-                <option id="schoolParnu" value="schoolParnu">International school of Parnu</option>
-                <option id="schoolViljandi" value="schoolViljandi">International school of Viljandi</option>
+
+                <option *ngFor="let school of schools" id="{{ school.id }}" value="{{ school }}">{{ school.name }}</option>
+
               </select>
             </div>
-            <div class="form-group">
-              <label class="font-weight-bold" for="fields">Specialized Fields</label>
+
+            <!--<div class="form-group">
+              <label class="font-weight-bold" for="fields">Grade</label>
               <select multiple class="form-control" id="fields" name="fields" required ngModel>
-                <option id="mathematics" value="mathematics">Mathematics</option>
-                <option id="social" value="social">Social science</option>
-                <option id="linguistics" value="linguistics">Linguistic studies</option>
-                <option id="zoology" value="zoology">Zoology</option>
-                <option id="geography" value="geography">Geography</option>
+                <option id="1" value="1">1</option>
+                ...
               </select>
-            </div>
+            </div>-->
+
             <div class="form-group">
               <label class="font-weight-bold" for="joindate">Join date</label>
               <div class="input-group">
@@ -71,10 +72,12 @@
                 </div>
               </div>
             </div>
+
             <div class="form-group form-check">
               <input type="checkbox" class="form-check-input" id="isactive" name="isactive" ngModel>
               <label class="form-check label font-weight-bold" for="isactive">Is Active</label>
             </div>
+
             <button type="submit" class="btn btn-primary">Submit</button>
           </form>
         </div>

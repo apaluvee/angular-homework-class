@@ -13,21 +13,23 @@
           <th scope="col">Name</th>
           <th scope="col">Joined on</th>
           <th scope="col">School</th>
-          <th scope="col">Specialized fields</th>
+          <!--<th scope="col">Specialized fields</th>-->
           <th scope="col">Is active</th>
         </tr>
         </thead>
         <tbody>
         <tr *ngFor="let teacher of teachers">
-          <th scope="row">{{ teacher.id }}</th>
+          <th scope="row">{{ teacher.teacherId }}</th>
           <td>{{ teacher.name }}</td>
           <td>{{ teacher.joinDate | date: "longDate"}}</td>
           <td>{{ teacher.school.name }}</td>
-          <td>{{ teacher.specialistFields.join(', ') }}</td>
+          <!--<td>{{ teacher.specialistFields.join(', ') }}</td>-->
           <td>{{ teacher.active }}</td>
         </tr>
         </tbody>
       </table>
+
+      <!-- Add button -->
       <ng-template #teacherForm let-modal>
         <div class="modal-header">
           <h5 class="modal-title" id="teacherModalLabel">New teacher</h5>
@@ -42,6 +44,7 @@
               <input type="text" class="form-control" id="name" name="name" placeholder="Enter full name" required
                      ngModel>
             </div>
+
             <div class="form-group">
               <label class="font-weight-bold" for="school">School</label>
               <select class="form-control" id="school" name="school" required ngModel>
@@ -50,7 +53,8 @@
 
               </select>
             </div>
-            <div class="form-group">
+
+            <!--<div class="form-group">
               <label class="font-weight-bold" for="fields">Specialized Fields</label>
               <select multiple class="form-control" id="fields" name="fields" required ngModel>
                 <option id="mathematics" value="mathematics">Mathematics</option>
@@ -59,7 +63,8 @@
                 <option id="zoology" value="zoology">Zoology</option>
                 <option id="geography" value="geography">Geography</option>
               </select>
-            </div>
+            </div>-->
+
             <div class="form-group">
               <label class="font-weight-bold" for="joindate">Join date</label>
               <div class="input-group">
@@ -70,6 +75,12 @@
                 </div>
               </div>
             </div>
+
+            <div class="form-group form-check">
+              <input type="checkbox" class="form-check-input" id="isactive" name="isactive" ngModel>
+              <label class="form-check label font-weight-bold" for="isactive">Is Active</label>
+            </div>
+
             <button type="submit" class="btn btn-primary">Submit</button>
           </form>
         </div>

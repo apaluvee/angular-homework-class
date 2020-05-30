@@ -1,20 +1,16 @@
-import {Utils} from '../../commons/utils';
-
 export class Student {
-  studentId: string;
+  studentId: number;
   name: string;
   joinDate: Date;
   isActive: boolean;
   school: string;
   specialistFields: string[];
 
-  constructor(name: string, joinDate: Date, isActive: boolean, school: string, specialistFields: string[]) {
-    const utilInstance = new Utils();
-    this.studentId = 'T' + utilInstance.getRandomId();
+  constructor(id: number, name: string, joinDate: Date, isActive: boolean, school: string) {
+    this.studentId = id;
     this.name = name;
     this.joinDate = joinDate;
     this.isActive = isActive;
     this.school = school;
-    this.specialistFields = specialistFields;
   }
 }

@@ -1,7 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {Teacher} from './model/teacher';
 import {TeacherService} from './data/teacher.service';
-import {Utils} from '../commons/utils';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {SchoolService} from '../school/data/school.service';
 
