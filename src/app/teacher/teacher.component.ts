@@ -34,7 +34,7 @@ export class TeacherComponent implements OnInit {
       f.value.joindate.day.toString();
 
     this.teacherService.createTeacher(new Teacher(f.value.id, f.value.name, new Date(joinDateString), true,
-      f.value.school, this.getSpecializedFields(f.value.fields)));
+      f.value.school));
 
     this.modalService.dismissAll();
     setTimeout('location.reload();', 2000);

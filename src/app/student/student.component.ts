@@ -1,10 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {Student} from './model/student';
 import {StudentService} from './data/student.service';
-import {Utils} from '../commons/utils';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {SchoolService} from '../school/data/school.service';
-import {Teacher} from '../teacher/model/teacher';
 
 @Component({
   selector: 'app-student',
